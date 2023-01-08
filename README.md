@@ -10,6 +10,8 @@ aSSL is now called xSSL. xSSL implements technology similar to SSL over http. Em
 
 Upload, copy / paste to server and run index.php. xSSL is composed of two parts: a client-side component and a server-side component. The first is a client side scripting language, pure Javascript files are used, the second is server side language and depends on specific languages (Javascript, PHP, Java, Ruby, etc.), only a PHP version is available. xSSL encrypts the $_POST or $_GET to the server and encrypts back again from the server to the client.
 
+![Alt text](xssl_screen.png)
+
 **How xSSL works**
 
 1. On page load the (Javascript) connection routine is called aSSL.connect(url,showConn) and the PHP connection routine is called aSSL::response() conn.php. Each side doesn't have their own public and private keys, exchanging and signing messages. Instead it works more like regular SSL.
