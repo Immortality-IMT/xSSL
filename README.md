@@ -1,5 +1,7 @@
 # xSSL, SSL without a certificate issuer. end to end encryption between client side using JavaScript & server side using PHP
 
+![aSSL](xssl_screen.png)
+
 aSSL originally created by Francesco Sullo - Rome, Italy (https://web.archive.org/web/20170216003527/http://assl.sullof.com/assl/), the project was orphaned some years ago now.
 
 Simply throw it in web directory and load index.php. PHP Version requires php-gmp so **apt-get install php-gmp** and then you may need to enable PHP FPM in Apache2 by a2enmod proxy_fcgi setenvif and a2enconf php-fpm and reload apache as per the instructions provided by the installation of php-gmp.
@@ -9,8 +11,6 @@ Minimal update to work with PHP8.2. PHP changes alot between versions, so it cou
 aSSL is now called xSSL. xSSL implements technology similar to SSL over http. Embeddable in any http website application and provide end to end encryption without third party issuer. xSSL is in development and not for production, the files are a working demo. The goal of the project is to make the end to end encryption more secure, possibly even ID the server to the client without a certificate issuer.
 
 Upload, copy / paste to server and run index.php. xSSL is composed of two parts: a client-side component and a server-side component. The first is a client side scripting language, pure Javascript files are used, the second is server side language and depends on specific languages (Javascript, PHP, Java, Ruby, etc.), only a PHP version is available. xSSL encrypts the $_POST or $_GET to the server and encrypts back again from the server to the client.
-
-![Alt text](xssl_screen.png)
 
 **How xSSL works**
 
