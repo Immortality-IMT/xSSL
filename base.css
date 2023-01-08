@@ -1,0 +1,178 @@
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	color:#779316;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	text-align:center;
+}
+
+a {
+	color: #dd3f3f;
+	text-decoration:none;
+}
+
+a:hover {
+	color: #fd4f3f;
+	background-color:#ff9;
+	text-decoration:none;
+}
+
+#intestazione {
+	height:52px;
+	display:block;
+
+}
+
+#logo {
+	padding:10px 0 0 16px;
+	float:left;
+	vertical-align:middle;
+}
+
+#loading {
+	float:left;
+	padding:20px 0 0 10px;
+}
+
+#bodyBody {
+	color:#808080;
+	display:block;
+	padding:12px;
+	width:333px;
+	margin:0 auto;
+	text-align:justify;
+}
+
+#status {
+	font-size:9px;
+	padding:3px 8px;
+}
+
+#result {
+	display:none;
+	background-color:#ff9;
+	padding:2px 4px;
+	margin:2px 0;
+	font-size:10px;
+}
+
+div#login {
+	margin:24px 12px 12px 18px;
+	padding:12px 8px;
+}
+
+input {
+	border:1px solid #0c6;
+	background-color:#fff;
+	font-family:Tahoma,Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding:0 0 0 4px;
+	margin:1px;
+}
+
+
+input.button {
+	border:2px solid #066;
+	background-color:#096;
+	color:#fff;
+	font-weight:bold;
+}
+
+.bloc {
+	width:200px;
+	border:1px dotted #690;
+	background-color:#df8;
+	color:#000;
+	padding:8px;
+}
+
+.bloc2 {
+	width:300px;
+}
+
+div#area {
+	display:none;
+	padding:12px;
+	width:270px;
+	background-color:#fff;
+	border:1px #6c3 solid;
+	font-family:"Courier New", Courier, monospace;
+	font-size:11px;
+}
+
+#over {
+	padding:16px 0 8px 24px;
+	font-weight:bold;
+}
+
+.style3 {
+    font-size: 10px;
+}
+
+.style6 {
+	color: #95b81a;
+	font-size: 16px;
+}
+
+/* ========================= aSSL connect ========================= */
+
+
+div#asslbar{
+	background:#f5f6be;
+	width:100%;
+	margin:0;
+	padding:0;
+	height:20px;
+	border-bottom:1px solid #a5acb2;
+	overflow:hidden;
+	}
+
+div.asslStatus {
+	font-weight:normal;
+	text-align:center;
+	font-size:10px;
+	color:#fe0101;
+	padding-top:4px;
+	height:16px;
+	}
+	
+div.asslStatus a,
+div.asslStatus a:link,
+div.asslStatus a:visited,
+div.asslStatus a:hover,
+div.asslStatus a:active {
+	padding:0 2px;
+	color:#000;
+	text-decoration:underline;
+	font-weight:normal;
+	}
+	
+div.asslStatus a:hover,
+div.asslStatus a:active {
+	text-decoration:none;
+	background:#000;
+	color:#fff;
+	}
+
+div#connecting {
+	background:url("images/assl_connecting.gif") repeat-x left top;
+	display:none;
+	}
+	
+div#connected {
+	background:url("images/assl_connected.gif") no-repeat right top;
+	display:none;
+	color:#a09080;
+	}
+	
+div#noconnect {
+	background:url("images/assl_connected.gif") no-repeat right -21px;
+	display:none;
+	}
+
+div.onprogress {	
+	background:url("images/assl_connecting.gif");
+}

@@ -1,0 +1,15 @@
+aSSL 1.2 (beta3) for PHP
+(c) 2006+ Francesco Sullo, http://assl.sullof.com
+
+aSSL is a library distributed under MIT License (http://www.opensource.org/licenses/mit-license.php) thats implements a technology similar to SSL without HTTPS.
+
+aSSL enables the client to negotiate a secret random 128-bit key with the server using the RSA algorithm. Once the connection has been established, the data will be sent and received using AES algorithm.
+
+aSSL is composed of some Javascript files and a server side component. Because I have recently changed the negotiation algoritm from RC4 to RSA, only a pure Javascript (ASP) server component is currently available. I will do a porting for the main web languages (PHP, Java, Perl, Python, TKL, etc.) as soon as possible once the library has passed the beta phase.
+
+Thanks to
+
+Tom Wu for its BigIntegers and RSA in JavaScript (http://www-cs-students.stanford.edu/~tjw/jsbn/).
+Chriss Veness for its AES Javascript implementation (http://www.movable-type.co.uk/scripts/AES.html).
+Ryan Perry for the PHP aSSL porting.
+Mark Brekelmans and Thomas Krapp for fixing in PHP porting.
