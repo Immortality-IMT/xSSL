@@ -1,4 +1,5 @@
 <?php
+$obfuscator = array();
 $obfuscator['aSSL'] = '1.2';
 
 //512 bits RSA key
