@@ -1,4 +1,4 @@
-#xSSL, SSL without a certificate issuer. End to end encryption between client side using JavaScript & server side using PHP
+# xSSL, SSL without a certificate issuer. End to end encryption between client side using JavaScript & server side using PHP
 
 ![aSSL](xssl_screen.png)
 
