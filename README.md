@@ -1,18 +1,14 @@
-# xSSL, SSL without a certificate issuer. End to end encryption between client side using JavaScript & server side using PHP
+# aSSL Ajax SSL - end to end encryption between client side JavaScript & server side PHP
 
-![aSSL](xssl_screen.png)
+Simply throw it in web directory and load index.php
 
-aSSL originally created by Francesco Sullo - Rome, Italy (https://web.archive.org/web/20170216003527/http://assl.sullof.com/assl/), the project was orphaned some years ago now.
+aSSL implements technology similar to SSL over http. Embeddable in any http website application and provide end to end encryption without third party issuer. aSSL is in development and not production ready, the files are a working demo. The goal of the project is to make the end to end encryption more secure, possibly even ID the server to the client without a certificate issuer.
 
-Simply throw it in web directory and load index.php. PHP Version requires php-gmp so **apt-get install php-gmp** and then you may need to enable PHP FPM in Apache2 by a2enmod proxy_fcgi setenvif and a2enconf php-fpm and reload apache as per the instructions provided by the installation of php-gmp.
+Upload, copy / paste to server and run index.php. aSSL is composed of two parts: a client-side component and a server-side component. The first is a client side scripting language, pure Javascript files are used, the second is server side language and depends on specific languages (Javascript, PHP, Java, Ruby, etc.), only a PHP version is available. aSSL encrypts the $_POST or $_GET to the server and encrypts back again from the server to the client.
 
-Minimal update to work with PHP8.2. PHP changes alot between versions, so it could break.
+PHP Version requires php-gmp so **apt-get install php5-gmp** and then you may need to enable PHP FPM in Apache2 by a2enmod proxy_fcgi setenvif and a2enconf php-fpm and reload apache as per the instructions provided by the installation of php-gmp.
 
-aSSL is now called xSSL. xSSL implements technology similar to SSL over http. Embeddable in any http website application and provide end to end encryption without third party issuer. xSSL is in development and not for production, the files are a working demo. The goal of the project is to make the end to end encryption more secure, possibly even ID the server to the client without a certificate issuer.
-
-Upload, copy / paste to server and run index.php. xSSL is composed of two parts: a client-side component and a server-side component. The first is a client side scripting language, pure Javascript files are used, the second is server side language and depends on specific languages (Javascript, PHP, Java, Ruby, etc.), only a PHP version is available. xSSL encrypts the $_POST or $_GET to the server and encrypts back again from the server to the client.
-
-**How xSSL works**
+**How aSSL works**
 
 1. On page load the (Javascript) connection routine is called aSSL.connect(url,showConn) and the PHP connection routine is called aSSL::response() conn.php. Each side doesn't have their own public and private keys, exchanging and signing messages. Instead it works more like regular SSL.
 
@@ -103,8 +99,8 @@ The source code are mirror images of eachother. So any changes must be identical
 
 aSSL uses an encryption lib that PHP no longer supports. https://github.com/pear/Crypt_RSA - implementation of RSA in php version,  https://pear.php.net/package/Crypt_RSA - message reads This package is not maintained anymore and has been superseded. Package has moved to channel phpseclib.sourceforge.net, package Crypt_RSA. The package has fixes and still functions.
 
-Credits go to... Tom Wu for its BigIntegers and RSA in JavaScript, Chriss Veness for its AES Javascript implementation, Ryan Perry for the PHP aSSL porting 
- 
+Originally created by Francesco Sullo - Rome, Italy (https://web.archive.org/web/20170216003527/http://assl.sullof.com/assl/), the project was orphaned some years ago now. Credits go to... Tom Wu for its BigIntegers and RSA in JavaScript, Chriss Veness for its AES Javascript implementation, Ryan Perry for the PHP aSSL porting 
+
 30-12-2009, Fixed a bug in the aSSL PHP version. Thanks to Thomas Krapp.
 19-11-2009, Fixed a bug in the aSSL PHP version. Thanks to Mark Brekelmans.
 
