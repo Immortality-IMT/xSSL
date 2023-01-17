@@ -1,62 +1,62 @@
 <?php
-/**
- * Crypt_RSA allows to do following operations:
- *     - key pair generation
- *     - encryption and decryption
- *     - signing and sign validation
- *
- * PHP versions 4 and 5
- *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
- *
- * @category   Encryption
- * @package    Crypt_RSA
- * @author     Alexander Valyalkin <valyala@gmail.com>
- * @copyright  2006 Alexander Valyalkin
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    1.2.0b
- * @link       http://pear.php.net/package/Crypt_RSA
+/*
+ Crypt_RSA allows to do following operations:
+     - key pair generation
+     - encryption and decryption
+     - signing and sign validation
+ 
+ PHP versions 4 and 5
+ 
+ LICENSE: This source file is subject to version 3.0 of the PHP license
+ that is available through the world-wide-web at the following URI:
+ http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ the PHP License and are unable to obtain it through the web, please
+ send a note to license@php.net so we can mail you a copy immediately.
+ 
+ @category   Encryption
+ @package    Crypt_RSA
+ @author     Alexander Valyalkin <valyala@gmail.com>
+ @copyright  2006 Alexander Valyalkin
+ @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ @version    1.2.0b
+ @link       http://pear.php.net/package/Crypt_RSA
  */
 
-/**
- * Crypt_RSA_Math_BCMath class.
- *
- * Provides set of math functions, which are used by Crypt_RSA package
- * This class is a wrapper for PHP BCMath extension.
- * See http://php.net/manual/en/ref.bc.php for details.
- *
- * @category   Encryption
- * @package    Crypt_RSA
- * @author     Alexander Valyalkin <valyala@gmail.com>
- * @copyright  2005, 2006 Alexander Valyalkin
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Crypt_RSA
- * @version    @package_version@
- * @access     public
+/*
+ Crypt_RSA_Math_BCMath class.
+ 
+ Provides set of math functions, which are used by Crypt_RSA package
+ This class is a wrapper for PHP BCMath extension.
+ See http://php.net/manual/en/ref.bc.php for details.
+ 
+ @category   Encryption
+ @package    Crypt_RSA
+ @author     Alexander Valyalkin <valyala@gmail.com>
+ @copyright  2005, 2006 Alexander Valyalkin
+ @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ @link       http://pear.php.net/package/Crypt_RSA
+ @version    @package_version@
+ @access     public
  */
 class Crypt_RSA_Math_BCMath
 {
-    /**
-     * error description
-     *
-     * @var string
-     * @access public
+    /*
+     error description
+     
+     @var string
+     @access public
      */
     var $errstr = '';
 
-    /**
-     * Performs Miller-Rabin primality test for number $num 
-     * with base $base. Returns true, if $num is strong pseudoprime
-     * by base $base. Else returns false.
-     *
-     * @param string $num
-     * @param string $base
-     * @return bool
-     * @access private
+    /*
+     Performs Miller-Rabin primality test for number $num 
+     with base $base. Returns true, if $num is strong pseudoprime
+     by base $base. Else returns false.
+     
+     @param string $num
+     @param string $base
+     @return bool
+     @access private
      */
     function _millerTest($num, $base)
     {
@@ -89,14 +89,15 @@ class Crypt_RSA_Math_BCMath
         return false;
     }
 
-    /**
-     * Crypt_RSA_Math_BCMath constructor.
-     * Checks an existance of PHP BCMath extension.
-     * On failure saves error description in $this->errstr
-     *
-     * @access public
+    /*
+     Crypt_RSA_Math_BCMath constructor.
+     Checks an existance of PHP BCMath extension.
+     On failure saves error description in $this->errstr
+     
+     @access public
      */
-    function Crypt_RSA_Math_BCMath()
+    public function __construct()
+    //function Crypt_RSA_Math_BCMath()
     {
         if (!extension_loaded('bcmath')) {
             if (!@dl('bcmath.' . PHP_SHLIB_SUFFIX) && !@dl('php_bcmath.' . PHP_SHLIB_SUFFIX)) {
@@ -107,37 +108,37 @@ class Crypt_RSA_Math_BCMath
         }
     }
 
-    /**
-     * Transforms binary representation of large integer into its native form.
-     * 
-     * Example of transformation:
-     *    $str = "\x12\x34\x56\x78\x90";
-     *    $num = 0x9078563412;
-     *
-     * @param string $str
-     * @return string
-     * @access public
+    /*
+     Transforms binary representation of large integer into its native form.
+     
+     Example of transformation:
+        $str = "\x12\x34\x56\x78\x90";
+        $num = 0x9078563412;
+     
+     @param string $str
+     @return string
+     @access public
      */
     function bin2int($str)
     {
         $result = '0';
         $n = strlen($str);
         do {
-            $result = bcadd(bcmul($result, '256'), ord($str{--$n}));
+            $result = bcadd(bcmul($result, '256'), ord($str[--$n]));
         } while ($n > 0);
         return $result;
     }
 
-    /**
-     * Transforms large integer into binary representation.
-     * 
-     * Example of transformation:
-     *    $num = 0x9078563412;
-     *    $str = "\x12\x34\x56\x78\x90";
-     *
-     * @param string $num
-     * @return string
-     * @access public
+    /*
+     Transforms large integer into binary representation.
+     
+     Example of transformation:
+        $num = 0x9078563412;
+        $str = "\x12\x34\x56\x78\x90";
+     
+     @param string $num
+     @return string
+     @access public
      */
     function int2bin($num)
     {
@@ -149,11 +150,11 @@ class Crypt_RSA_Math_BCMath
         return $result;
     }
     
-    /**
-     * Converts hex string to binary format
-     *
-     * @param string $str
-     * @return string
+    /*
+     Converts hex string to binary format
+     
+     @param string $str
+     @return string
      */
     function hex2bin($str)
     {
@@ -169,11 +170,11 @@ class Crypt_RSA_Math_BCMath
     	return $result;
     }
     
-    /**
-     * Converts binary string to hex string
-     *
-     * @param string $str
-     * @return string
+    /*
+     Converts binary string to hex string
+     
+     @param string $str
+     @return string
      */
     function bin2hex($str)
     {
@@ -188,11 +189,11 @@ class Crypt_RSA_Math_BCMath
     	return $result;
     }
     
-    /**
-     * Converts binary string to byte array
-     *
-     * @param string $binValue
-     * @return array
+    /*
+     Converts binary string to byte array
+     
+     @param string $binValue
+     @return array
      */
     function toByteArray($binValue)
     {
@@ -204,14 +205,14 @@ class Crypt_RSA_Math_BCMath
     	return $result;
     }
 
-    /**
-     * Calculates pow($num, $pow) (mod $mod)
-     *
-     * @param string $num
-     * @param string $pow
-     * @param string $mod
-     * @return string
-     * @access public
+    /*
+     Calculates pow($num, $pow) (mod $mod)
+     
+     @param string $num
+     @param string $pow
+     @param string $mod
+     @return string
+     @access public
      */
     function powmod($num, $pow, $mod)
     {
@@ -232,56 +233,56 @@ class Crypt_RSA_Math_BCMath
         return $result;
     }
 
-    /**
-     * Calculates $num1 * $num2
-     *
-     * @param string $num1
-     * @param string $num2
-     * @return string
-     * @access public
+    /*
+     Calculates $num1 * $num2
+     
+     @param string $num1
+     @param string $num2
+     @return string
+     @access public
      */
     function mul($num1, $num2)
     {
         return bcmul($num1, $num2);
     }
 
-    /**
-     * Calculates $num1 % $num2
-     *
-     * @param string $num1
-     * @param string $num2
-     * @return string
-     * @access public
+    /*
+     Calculates $num1 % $num2
+     
+     @param string $num1
+     @param string $num2
+     @return string
+     @access public
      */
     function mod($num1, $num2)
     {
         return bcmod($num1, $num2);
     }
 
-    /**
-     * Compares abs($num1) to abs($num2).
-     * Returns:
-     *   -1, if abs($num1) < abs($num2)
-     *   0, if abs($num1) == abs($num2)
-     *   1, if abs($num1) > abs($num2)
-     *
-     * @param string $num1
-     * @param string $num2
-     * @return int
-     * @access public
+    /*
+     Compares abs($num1) to abs($num2).
+     Returns:
+       -1, if abs($num1) < abs($num2)
+       0, if abs($num1) == abs($num2)
+       1, if abs($num1) > abs($num2)
+     
+     @param string $num1
+     @param string $num2
+     @return int
+     @access public
      */
     function cmpAbs($num1, $num2)
     {
         return bccomp($num1, $num2);
     }
 
-    /**
-     * Tests $num on primality. Returns true, if $num is strong pseudoprime.
-     * Else returns false.
-     *
-     * @param string $num
-     * @return bool
-     * @access private
+    /*
+     Tests $num on primality. Returns true, if $num is strong pseudoprime.
+     Else returns false.
+     
+     @param string $num
+     @return bool
+     @access private
      */
     function isPrime($num)
     {
@@ -338,13 +339,13 @@ class Crypt_RSA_Math_BCMath
         return true;
     }
 
-    /**
-     * Generates prime number with length $bits_cnt
-     * using $random_generator as random generator function.
-     *
-     * @param int $bits_cnt
-     * @param string $rnd_generator
-     * @access public
+    /*
+     Generates prime number with length $bits_cnt
+     using $random_generator as random generator function.
+     
+     @param int $bits_cnt
+     @param string $rnd_generator
+     @access public
      */
     function getPrime($bits_cnt, $random_generator)
     {
@@ -372,37 +373,37 @@ class Crypt_RSA_Math_BCMath
         return $num;
     }
 
-    /**
-     * Calculates $num - 1
-     *
-     * @param string $num
-     * @return string
-     * @access public
+    /*
+     Calculates $num - 1
+     
+     @param string $num
+     @return string
+     @access public
      */
     function dec($num)
     {
         return bcsub($num, '1');
     }
 
-    /**
-     * Returns true, if $num is equal to one. Else returns false
-     *
-     * @param string $num
-     * @return bool
-     * @access public
+    /*
+     Returns true, if $num is equal to one. Else returns false
+     
+     @param string $num
+     @return bool
+     @access public
      */
     function isOne($num)
     {
         return !bccomp($num, '1');
     }
 
-    /**
-     * Finds greatest common divider (GCD) of $num1 and $num2
-     *
-     * @param string $num1
-     * @param string $num2
-     * @return string
-     * @access public
+    /*
+     Finds greatest common divider (GCD) of $num1 and $num2
+     
+     @param string $num1
+     @param string $num2
+     @return string
+     @access public
      */
     function GCD($num1, $num2)
     {
@@ -414,14 +415,14 @@ class Crypt_RSA_Math_BCMath
         return $num1;
     }
 
-    /**
-     * Finds inverse number $inv for $num by modulus $mod, such as:
-     *     $inv * $num = 1 (mod $mod)
-     *
-     * @param string $num
-     * @param string $mod
-     * @return string
-     * @access public
+    /*
+     Finds inverse number $inv for $num by modulus $mod, such as:
+         $inv * $num = 1 (mod $mod)
+     
+     @param string $num
+     @param string $mod
+     @return string
+     @access public
      */
     function invmod($num, $mod)
     {
@@ -444,18 +445,18 @@ class Crypt_RSA_Math_BCMath
         return $x;
     }
 
-    /**
-     * Returns bit length of number $num
-     *
-     * @param string $num
-     * @return int
-     * @access public
+    /*
+     Returns bit length of number $num
+     
+     @param string $num
+     @return int
+     @access public
      */
     function bitLen($num)
     {
         $tmp = $this->int2bin($num);
         $bit_len = strlen($tmp) * 8;
-        $tmp = ord($tmp{strlen($tmp) - 1});
+        $tmp = ord($tmp[strlen($tmp) - 1]);
         if (!$tmp) {
             $bit_len -= 8;
         }
@@ -468,15 +469,15 @@ class Crypt_RSA_Math_BCMath
         return $bit_len;
     }
 
-    /**
-     * Calculates bitwise or of $num1 and $num2,
-     * starting from bit $start_pos for number $num1
-     *
-     * @param string $num1
-     * @param string $num2
-     * @param int $start_pos
-     * @return string
-     * @access public
+    /*
+     Calculates bitwise or of $num1 and $num2,
+     starting from bit $start_pos for number $num1
+     
+     @param string $num1
+     @param string $num2
+     @param int $start_pos
+     @return string
+     @access public
      */
     function bitOr($num1, $num2, $start_pos)
     {
@@ -496,15 +497,15 @@ class Crypt_RSA_Math_BCMath
         return $this->bin2int($tmp1);
     }
 
-    /**
-     * Returns part of number $num, starting at bit
-     * position $start with length $length
-     *
-     * @param string $num
-     * @param int start
-     * @param int length
-     * @return string
-     * @access public
+    /*
+     Returns part of number $num, starting at bit
+     position $start with length $length
+     
+     @param string $num
+     @param int start
+     @param int length
+     @return string
+     @access public
      */
     function subint($num, $start, $length)
     {
@@ -518,15 +519,15 @@ class Crypt_RSA_Math_BCMath
         $num = bcdiv($num, 1 << $start_bit);
         $tmp = substr($this->int2bin($num), $start_byte, $byte_length);
         $tmp = str_pad($tmp, $byte_length, "\0");
-        $tmp = substr_replace($tmp, $tmp{$byte_length - 1} & chr(0xff >> (8 - $bit_length)), $byte_length - 1, 1);
+        $tmp = substr_replace($tmp, $tmp[$byte_length - 1] & chr(0xff >> (8 - $bit_length)), $byte_length - 1, 1);
         return $this->bin2int($tmp);
     }
 
-    /**
-     * Returns name of current wrapper
-     *
-     * @return string name of current wrapper
-     * @access public
+    /*
+     Returns name of current wrapper
+     
+     @return string name of current wrapper
+     @access public
      */
     function getWrapperName()
     {

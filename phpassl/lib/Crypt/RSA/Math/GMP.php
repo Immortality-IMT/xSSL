@@ -1,63 +1,64 @@
 <?php
-/**
- * Crypt_RSA allows to do following operations:
- *     - key pair generation
- *     - encryption and decryption
- *     - signing and sign validation
- *
- * PHP versions 4 and 5
- *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
- *
- * @category   Encryption
- * @package    Crypt_RSA
- * @author     Alexander Valyalkin <valyala@gmail.com>
- * @copyright  2005, 2006 Alexander Valyalkin
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    1.2.0b
- * @link       http://pear.php.net/package/Crypt_RSA
+/*
+  Crypt_RSA allows to do following operations:
+      - key pair generation
+      - encryption and decryption
+      - signing and sign validation
+ 
+  PHP versions 4 and 5
+ 
+  LICENSE: This source file is subject to version 3.0 of the PHP license
+  that is available through the world-wide-web at the following URI:
+  http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+  the PHP License and are unable to obtain it through the web, please
+  send a note to license@php.net so we can mail you a copy immediately.
+ 
+  @category   Encryption
+  @package    Crypt_RSA
+  @author     Alexander Valyalkin <valyala@gmail.com>
+  @copyright  2005, 2006 Alexander Valyalkin
+  @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+  @version    1.2.0b
+  @link       http://pear.php.net/package/Crypt_RSA
  */
 
-/**
- * Crypt_RSA_Math_GMP class.
- *
- * Provides set of math functions, which are used by Crypt_RSA package
- * This class is a wrapper for PHP GMP extension.
- * See http://php.net/gmp for details.
- *
- * @category   Encryption
- * @package    Crypt_RSA
- * @author     Alexander Valyalkin <valyala@gmail.com>
- * @copyright  2005, 2006 Alexander Valyalkin
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Crypt_RSA
- * @version    @package_version@
- * @access     public
+/*
+  Crypt_RSA_Math_GMP class.
+ 
+  Provides set of math functions, which are used by Crypt_RSA package
+  This class is a wrapper for PHP GMP extension.
+  See http://php.net/gmp for details.
+ 
+  @category   Encryption
+  @package    Crypt_RSA
+  @author     Alexander Valyalkin <valyala@gmail.com>
+  @copyright  2005, 2006 Alexander Valyalkin
+  @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+  @link       http://pear.php.net/package/Crypt_RSA
+  @version    @package_version@
+  @access     public
  */
 class Crypt_RSA_Math_GMP
 {
-    /**
-     * error description
-     *
-     * @var string
-     * @access public
+    /*
+      error description
+     
+      @var string
+      @access public
      */
     var $errstr = '';
 
-    /**
-     * Crypt_RSA_Math_GMP constructor.
-     * Checks an existance of PHP GMP package.
-     * See http://php.net/gmp for details.
-     *
-     * On failure saves error description in $this->errstr
-     *
-     * @access public
+    /*
+      Crypt_RSA_Math_GMP constructor.
+      Checks an existance of PHP GMP package.
+      See http://php.net/gmp for details.
+     
+      On failure saves error description in $this->errstr
+     
+      @access public
      */
-    function Crypt_RSA_Math_GMP()
+    public function __construct()
+    //function Crypt_RSA_Math_GMP()
     {
         if (!extension_loaded('gmp')) {
             if (!@dl('gmp.' . PHP_SHLIB_SUFFIX) && !@dl('php_gmp.' . PHP_SHLIB_SUFFIX)) {
@@ -69,16 +70,16 @@ class Crypt_RSA_Math_GMP
         }
     }
 
-    /**
-     * Transforms binary representation of large integer into its native form.
-     * 
-     * Example of transformation:
-     *    $str = "\x12\x34\x56\x78\x90";
-     *    $num = 0x9078563412;
-     *
-     * @param string $str
-     * @return gmp resource
-     * @access public
+    /*
+      Transforms binary representation of large integer into its native form.
+      
+      Example of transformation:
+         $str = "\x12\x34\x56\x78\x90";
+         $num = 0x9078563412;
+     
+      @param string $str
+      @return gmp resource
+      @access public
      */
     function bin2int($str)
     {
@@ -92,16 +93,16 @@ class Crypt_RSA_Math_GMP
         return $result;
     }
 
-    /**
-     * Transforms large integer into binary representation.
-     * 
-     * Example of transformation:
-     *    $num = 0x9078563412;
-     *    $str = "\x12\x34\x56\x78\x90";
-     *
-     * @param gmp resource $num
-     * @return string
-     * @access public
+    /*
+      Transforms large integer into binary representation.
+      
+      Example of transformation:
+         $num = 0x9078563412;
+         $str = "\x12\x34\x56\x78\x90";
+     
+      @param gmp resource $num
+      @return string
+      @access public
      */
     function int2bin($num)
     {
@@ -113,11 +114,11 @@ class Crypt_RSA_Math_GMP
         return $result;
     }
     
-    /**
-     * Converts hex string to binary format
-     *
-     * @param string $str
-     * @return string
+    /*
+      Converts hex string to binary format
+     
+      @param string $str
+      @return string
      */
     function hex2bin($str)
     {
@@ -133,11 +134,11 @@ class Crypt_RSA_Math_GMP
     	return $result;
     }
     
-    /**
-     * Converts binary string to hex string
-     *
-     * @param string $str
-     * @return string
+    /*
+      Converts binary string to hex string
+     
+      @param string $str
+      @return string
      */
     function bin2hex($str)
     {
@@ -152,11 +153,11 @@ class Crypt_RSA_Math_GMP
     	return $result;
     }
     
-    /**
-     * Converts binary string to byte array
-     *
-     * @param string $binValue
-     * @return array
+    /*
+     Converts binary string to byte array
+     
+     @param string $binValue
+     @return array
      */
     function toByteArray($binValue)
     {
@@ -168,83 +169,83 @@ class Crypt_RSA_Math_GMP
     	return $result;
     }
     
-    /**
-     * Calculates pow($num, $pow) (mod $mod)
-     *
-     * @param gmp resource $num
-     * @param gmp resource $pow
-     * @param gmp resource $mod
-     * @return gmp resource
-     * @access public
+    /*
+     Calculates pow($num, $pow) (mod $mod)
+     
+     @param gmp resource $num
+     @param gmp resource $pow
+     @param gmp resource $mod
+     @return gmp resource
+     @access public
      */
     function powmod($num, $pow, $mod)
     {
         return gmp_powm($num, $pow, $mod);
     }
 
-    /**
-     * Calculates $num1 * $num2
-     *
-     * @param gmp resource $num1
-     * @param gmp resource $num2
-     * @return gmp resource
-     * @access public
+    /*
+     Calculates $num1 $num2
+     
+     @param gmp resource $num1
+     @param gmp resource $num2
+     @return gmp resource
+     @access public
      */
     function mul($num1, $num2)
     {
         return gmp_mul($num1, $num2);
     }
 
-    /**
-     * Calculates $num1 % $num2
-     *
-     * @param string $num1
-     * @param string $num2
-     * @return string
-     * @access public
+    /*
+     Calculates $num1 % $num2
+     
+     @param string $num1
+     @param string $num2
+     @return string
+     @access public
      */
     function mod($num1, $num2)
     {
         return gmp_mod($num1, $num2);
     }
 
-    /**
-     * Compares abs($num1) to abs($num2).
-     * Returns:
-     *   -1, if abs($num1) < abs($num2)
-     *   0, if abs($num1) == abs($num2)
-     *   1, if abs($num1) > abs($num2)
-     *
-     * @param gmp resource $num1
-     * @param gmp resource $num2
-     * @return int
-     * @access public
+    /*
+     Compares abs($num1) to abs($num2).
+     Returns:
+       -1, if abs($num1) < abs($num2)
+       0, if abs($num1) == abs($num2)
+       1, if abs($num1) > abs($num2)
+     
+     @param gmp resource $num1
+     @param gmp resource $num2
+     @return int
+     @access public
      */
     function cmpAbs($num1, $num2)
     {
         return gmp_cmp($num1, $num2);
     }
 
-    /**
-     * Tests $num on primality. Returns true, if $num is strong pseudoprime.
-     * Else returns false.
-     *
-     * @param string $num
-     * @return bool
-     * @access private
+    /*
+     Tests $num on primality. Returns true, if $num is strong pseudoprime.
+     Else returns false.
+     
+     @param string $num
+     @return bool
+     @access private
      */
     function isPrime($num)
     {
         return gmp_prob_prime($num) ? true : false;
     }
 
-    /**
-     * Generates prime number with length $bits_cnt
-     * using $random_generator as random generator function.
-     *
-     * @param int $bits_cnt
-     * @param string $rnd_generator
-     * @access public
+    /*
+     Generates prime number with length $bits_cnt
+     using $random_generator as random generator function.
+     
+     @param int $bits_cnt
+     @param string $rnd_generator
+     @access public
      */
     function getPrime($bits_cnt, $random_generator)
     {
@@ -272,63 +273,63 @@ class Crypt_RSA_Math_GMP
         return $num;
     }
 
-    /**
-     * Calculates $num - 1
-     *
-     * @param gmp resource $num
-     * @return gmp resource
-     * @access public
+    /*
+     Calculates $num - 1
+     
+     @param gmp resource $num
+     @return gmp resource
+     @access public
      */
     function dec($num)
     {
         return gmp_sub($num, 1);
     }
 
-    /**
-     * Returns true, if $num is equal to one. Else returns false
-     *
-     * @param gmp resource $num
-     * @return bool
-     * @access public
+    /*
+     Returns true, if $num is equal to one. Else returns false
+     
+     @param gmp resource $num
+     @return bool
+     @access public
      */
     function isOne($num)
     {
         return !gmp_cmp($num, 1);
     }
 
-    /**
-     * Finds greatest common divider (GCD) of $num1 and $num2
-     *
-     * @param gmp resource $num1
-     * @param gmp resource $num2
-     * @return gmp resource
-     * @access public
+    /*
+     Finds greatest common divider (GCD) of $num1 and $num2
+     
+     @param gmp resource $num1
+     @param gmp resource $num2
+     @return gmp resource
+     @access public
      */
     function GCD($num1, $num2)
     {
         return gmp_gcd($num1, $num2);
     }
 
-    /**
-     * Finds inverse number $inv for $num by modulus $mod, such as:
-     *     $inv * $num = 1 (mod $mod)
-     *
-     * @param gmp resource $num
-     * @param gmp resource $mod
-     * @return gmp resource
-     * @access public
+    /*
+     Finds inverse number $inv for $num by modulus $mod, such as:
+         $inv $num = 1 (mod $mod)
+     
+     @param gmp resource $num
+     @param gmp resource $mod
+     @return gmp resource
+     @access public
      */
     function invmod($num, $mod)
     {
         return gmp_invert($num, $mod);
     }
 
-    /**
-     * Returns bit length of number $num
-     *
-     * @param gmp resource $num
-     * @return int
-     * @access public
+    /*
+     Returns bit length of number $num
+     
+     @param gmp resource $num
+     @return int
+     @access public
      */
     function bitLen($num)
     {
@@ -347,15 +348,15 @@ class Crypt_RSA_Math_GMP
         return $bit_len;
     }
 
-    /**
-     * Calculates bitwise or of $num1 and $num2,
-     * starting from bit $start_pos for number $num1
-     *
-     * @param gmp resource $num1
-     * @param gmp resource $num2
-     * @param int $start_pos
-     * @return gmp resource
-     * @access public
+    /*
+     Calculates bitwise or of $num1 and $num2,
+     starting from bit $start_pos for number $num1
+     
+     @param gmp resource $num1
+     @param gmp resource $num2
+     @param int $start_pos
+     @return gmp resource
+     @access public
      */
     function bitOr($num1, $num2, $start_pos)
     {
@@ -375,15 +376,15 @@ class Crypt_RSA_Math_GMP
         return $this->bin2int($tmp1);
     }
 
-    /**
-     * Returns part of number $num, starting at bit
-     * position $start with length $length
-     *
-     * @param gmp resource $num
-     * @param int start
-     * @param int length
-     * @return gmp resource
-     * @access public
+    /*
+     Returns part of number $num, starting at bit
+     position $start with length $length
+     
+     @param gmp resource $num
+     @param int start
+     @param int length
+     @return gmp resource
+     @access public
      */
     function subint($num, $start, $length)
     {
@@ -401,11 +402,11 @@ class Crypt_RSA_Math_GMP
         return $this->bin2int($tmp);
     }
 
-    /**
-     * Returns name of current wrapper
-     *
-     * @return string name of current wrapper
-     * @access public
+    /*
+     Returns name of current wrapper
+     
+     @return string name of current wrapper
+     @access public
      */
     function getWrapperName()
     {
