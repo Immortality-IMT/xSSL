@@ -356,12 +356,19 @@ class Crypt_RSA_KeyPair extends Crypt_RSA_ErrorHandler
      *
      * @access public
      */
-    function Crypt_RSA_KeyPair($key_len, $wrapper_name = 'default', $error_handler = '', $random_generator = null)
+    public function __construct($key_len, $wrapper_name = 'default', $error_handler = '', $random_generator = null)
+    //function Crypt_RSA_KeyPair($key_len, $wrapper_name = 'default', $error_handler = '', $random_generator = null)
     {
         // set error handler
         $this->setErrorHandler($error_handler);
         // try to load math wrapper
-        $obj = &Crypt_RSA_MathLoader::loadWrapper($wrapper_name);
+
+        $math_loader = new Crypt_RSA_MathLoader();
+        $obj = $math_loader->loadWrapper($wrapper_name);
+
+//        $obj = &Crypt_RSA_MathLoader::loadWrapper($wrapper_name);
+
+
         if ($this->isError($obj)) {
             // error during loading of math wrapper
             $this->pushError($obj);

@@ -1,7 +1,7 @@
 <?php
-/**
- * Secure random number generator.
- *
+/*
+  Secure random number generator.
+ 
  */
 class PRNG
 {
