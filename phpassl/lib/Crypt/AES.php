@@ -62,7 +62,8 @@ class AES
 	 */
 	private static function ShiftRows($s, $Nb) 
 	{
-		$t = array();
+//		$t = array();
+        $t = array_fill(0, 4, null);
 		for ($r=1; $r < 4; $r++) 
 		{
 			for ($c = 0; $c < 4; $c++) $t[$c] = $s[$r][($c + $r) % $Nb];  // shift into temp copy
@@ -80,10 +81,14 @@ class AES
 	 */
 	private static function MixColumns($s, $Nb) 
 	{
+
+        $a = array_fill(0, 4, null);
+        $b = array_fill(0, 4, null);
+
 		for ($c = 0; $c < 4; $c++) 
 		{
-			$a = array();  // 'a' is a copy of the current column from 's'
-			$b = array();  // 'b' is a{02} in GF(2^8)
+			//$a = array();  // 'a' is a copy of the current column from 's'
+			//$b = array();  // 'b' is a{02} in GF(2^8)
 			for ($i = 0; $i < 4; $i++) 
 			{
 				$a[$i] = $s[$i][$c];

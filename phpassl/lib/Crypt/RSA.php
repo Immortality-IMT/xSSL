@@ -264,17 +264,27 @@ class Crypt_RSA extends Crypt_RSA_ErrorHandler
             return false;
         }
 
+   $rsa_key = new Crypt_RSA_Key($params = null, $wrapper_name = 'default', $error_handler = '');
+
         if (isset($params['enc_key'])) {
-            if (Crypt_RSA_Key::isValid($params['enc_key'])) {
-                $this->_enc_key = $params['enc_key'];
-            }
+
+                 
+                    if ($rsa_key->isValid($params['enc_key'])) {
+                        $this->_enc_key = $params['enc_key'];
+                    }
+
+                    //if (Crypt_RSA_Key::isValid($params['enc_key'])) {
+                    //    $this->_enc_key = $params['enc_key'];
+                    //}
+
             else {
                 $this->pushError('wrong encryption key. It must be an object of Crypt_RSA_Key class', CRYPT_RSA_ERROR_WRONG_KEY);
                 return false;
             }
         }
         if (isset($params['dec_key'])) {
-            if (Crypt_RSA_Key::isValid($params['dec_key'])) {
+            if ($rsa_key->isValid($params['dec_key'])) {
+            //if (Crypt_RSA_Key::isValid($params['dec_key'])) {
                 $this->_dec_key = $params['dec_key'];
             }
             else {
@@ -283,7 +293,8 @@ class Crypt_RSA extends Crypt_RSA_ErrorHandler
             }
         }
         if (isset($params['private_key'])) {
-            if (Crypt_RSA_Key::isValid($params['private_key'])) {
+            if ($rsa_key->isValid($params['private_key'])) {
+            //if (Crypt_RSA_Key::isValid($params['private_key'])) {
                 if ($params['private_key']->getKeyType() != 'private') {
                     $this->pushError('private key must have "private" attribute', CRYPT_RSA_ERROR_WRONG_KEY_TYPE);
                     return false;
@@ -296,7 +307,8 @@ class Crypt_RSA extends Crypt_RSA_ErrorHandler
             }
         }
         if (isset($params['public_key'])) {
-            if (Crypt_RSA_Key::isValid($params['public_key'])) {
+            if ($rsa_key->isValid($params['public_key'])) {
+            //if (Crypt_RSA_Key::isValid($params['public_key'])) {
                 if ($params['public_key']->getKeyType() != 'public') {
                     $this->pushError('public key must have "public" attribute', CRYPT_RSA_ERROR_WRONG_KEY_TYPE);
                     return false;
@@ -363,11 +375,15 @@ class Crypt_RSA extends Crypt_RSA_ErrorHandler
      */
     function encryptBinary($plain_data, $key = null)
     {
+
+        $rsa_key = new Crypt_RSA_Key($params = null, $wrapper_name = 'default', $error_handler = '');
+
         if (is_null($key)) {
             // use current encryption key
             $key = $this->_enc_key;
         }
-        else if (!Crypt_RSA_Key::isValid($key)) {
+        else if (!$rsa_key->isValid($key)) {
+        //else if (!Crypt_RSA_Key::isValid($key)) {
             $this->pushError('invalid encryption key. It must be an object of Crypt_RSA_Key class', CRYPT_RSA_ERROR_WRONG_KEY);
             return false;
         }
@@ -619,11 +635,16 @@ if (!$keyIsValid) {
      */
     function createSign($document, $private_key = null, $hash_func = null)
     {
+
+  $rsa_key = new Crypt_RSA_Key($params = null, $wrapper_name = 'default', $error_handler = '');
+
+
         // check private key
         if (is_null($private_key)) {
             $private_key = $this->_private_key;
         }
-        else if (!Crypt_RSA_Key::isValid($private_key)) {
+        else if (!$rsa_key->isValid($private_key)) {
+        //else if (!Crypt_RSA_Key::isValid($private_key)) {
             $this->pushError('invalid private key. It must be an object of Crypt_RSA_Key class', CRYPT_RSA_ERROR_WRONG_KEY);
             return false;
         }
@@ -661,11 +682,15 @@ if (!$keyIsValid) {
      */
     function validateSign($document, $signature, $public_key = null, $hash_func = null)
     {
+
+  $rsa_key = new Crypt_RSA_Key($params = null, $wrapper_name = 'default', $error_handler = '');
+
         // check public key
         if (is_null($public_key)) {
             $public_key = $this->_public_key;
         }
-        else if (!Crypt_RSA_Key::isValid($public_key)) {
+        else if (!$rsa_key->isValid($public_key)) {
+        //else if (!Crypt_RSA_Key::isValid($public_key)) {
             $this->pushError('invalid public key. It must be an object of Crypt_RSA_Key class', CRYPT_RSA_ERROR_WRONG_KEY);
             return null;
         }
